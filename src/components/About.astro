@@ -1,0 +1,59 @@
+---
+import Reveal from './Reveal.tsx';
+import { ShieldCheck, FlaskConical, ScanLine, Cat } from 'lucide-react';
+---
+
+<section id="nosotros" class="bg-brand-deep py-20 lg:py-28">
+	<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
+		<div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+			<Reveal client:load>
+				<div class="max-w-xl">
+					<h2 class="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+						Por qué Terranova
+					</h2>
+					<p class="mt-5 text-lg leading-relaxed text-white">
+						Somos un servicio veterinario integral: clínica, cirugía, emergencias, laboratorio
+						hematológico y Rayos X de última generación, en un mismo lugar.
+					</p>
+					<p class="mt-4 text-lg leading-relaxed text-white">
+						Y contamos con la Cat Boutique, según indican, única a nivel nacional: un espacio
+						dedicado por completo al bienestar de los gatos.
+					</p>
+				</div>
+			</Reveal>
+
+			<Reveal client:load delay={0.1}>
+				<div class="grid gap-4 sm:grid-cols-2">
+					<div class="rounded-3xl bg-white/10 p-6">
+						<ShieldCheck class="h-8 w-8 text-mint" />
+						<h3 class="mt-4 text-lg font-bold text-white">Atención integral</h3>
+						<p class="mt-1 text-sm leading-relaxed text-white">
+							Clínica, cirugía y emergencias bajo un mismo techo.
+						</p>
+					</div>
+					<div class="rounded-3xl bg-white/10 p-6">
+						<FlaskConical class="h-8 w-8 text-mint" />
+						<h3 class="mt-4 text-lg font-bold text-white">Laboratorio propio</h3>
+						<p class="mt-1 text-sm leading-relaxed text-white">
+							Hematología y química sanguínea para diagnósticos precisos.
+						</p>
+					</div>
+					<div class="rounded-3xl bg-white/10 p-6">
+						<ScanLine class="h-8 w-8 text-mint" />
+						<h3 class="mt-4 text-lg font-bold text-white">Rayos X de última generación</h3>
+						<p class="mt-1 text-sm leading-relaxed text-white">
+							Diagnóstico por imagen con equipos modernos.
+						</p>
+					</div>
+					<div class="rounded-3xl bg-mint p-6">
+						<Cat class="h-8 w-8 text-brand-deep" />
+						<h3 class="mt-4 text-lg font-bold text-ink">Cat Boutique</h3>
+						<p class="mt-1 text-sm leading-relaxed text-ink">
+							Única a nivel nacional, dedicada al bienestar de los gatos.
+						</p>
+					</div>
+				</div>
+			</Reveal>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,61 @@
+---
+import Reveal from './Reveal.tsx';
+import WhatsAppPill from './WhatsAppPill.astro';
+import WhatsAppIcon from './icons/WhatsAppIcon.astro';
+import { PawPrint, ArrowRight } from 'lucide-react';
+import { site } from '../data/site';
+---
+
+<section class="relative overflow-hidden bg-white">
+	<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
+		<div class="grid min-h-[100dvh] items-center gap-10 pt-24 pb-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24">
+			<div class="max-w-xl">
+				<Reveal client:load>
+					<span
+						class="inline-flex items-center gap-2 rounded-full bg-mint px-4 py-1.5 text-sm font-bold text-ink"
+					>
+						<PawPrint class="h-4 w-4" />
+						Clínica Veterinaria en Tumbaco
+					</span>
+				</Reveal>
+
+				<Reveal client:load delay={0.1}>
+					<h1 class="mt-6 font-display text-5xl font-bold leading-[0.95] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+						Consiente a tu <span class="text-brand">mascota</span>
+					</h1>
+				</Reveal>
+
+				<Reveal client:load delay={0.2}>
+					<p class="mt-6 max-w-md text-lg leading-relaxed text-ink/80">
+						Cuidamos con amor. Clínica, cirugía, laboratorio y Rayos X de última generación, con
+						la única Cat Boutique del país.
+					</p>
+				</Reveal>
+
+				<Reveal client:load delay={0.3}>
+					<div class="mt-9 flex flex-wrap items-center gap-4">
+						<WhatsAppPill href={site.whatsapp} label="Escríbenos por WhatsApp" size="lg" />
+						<a
+							href="/servicios"
+							class="inline-flex items-center gap-2 rounded-full border-2 border-brand-deep px-7 py-3.5 text-base font-bold text-brand-deep transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+						>
+							Ver servicios
+							<ArrowRight class="h-5 w-5" />
+						</a>
+					</div>
+				</Reveal>
+			</div>
+
+			<div class="lg:self-stretch lg:-mr-[max(0px,calc((100vw-1400px)/2+2rem))]">
+				<img
+					src="https://picsum.photos/seed/terranova-hero-consulta-mascota/1000/1200"
+					alt="Veterinaria en consulta con una mascota"
+					class="h-[420px] w-full object-cover sm:h-[520px] lg:h-full lg:min-h-[680px]"
+					width="1000"
+					height="1200"
+					fetchpriority="high"
+				/>
+			</div>
+		</div>
+	</div>
+</section>

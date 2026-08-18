@@ -1,0 +1,57 @@
+---
+import Reveal from './Reveal.tsx';
+import ServicesCarousel from './ServicesCarousel';
+import { PawPrint, ArrowRight } from 'lucide-react';
+
+interface Props {
+	/** Título del encabezado de la sección */
+	title?: string;
+	/** Nivel del título (h1 cuando la página abre en esta sección, h2 en el home) */
+	level?: 'h1' | 'h2';
+	/** Compensa el header fijo cuando la sección abre la página */
+	topOffset?: boolean;
+	/** Muestra el enlace a la página completa de servicios */
+	showLink?: boolean;
+}
+
+const { title = 'Servicios', level = 'h1', topOffset = true, showLink = false } = Astro.props;
+
+const Heading = level;
+---
+
+<section
+	class:list={[
+		'bg-mint',
+		topOffset ? 'pb-20 pt-[8rem] lg:pb-28 lg:pt-[9rem]' : 'py-20 lg:py-28',
+	]}
+>
+	<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
+		<Reveal client:load>
+			<div class="max-w-2xl">
+				<span class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-brand-deep shadow-sm">
+					<PawPrint class="h-6 w-6" stroke-width={1.8} aria-hidden="true" />
+				</span>
+				<Heading class="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink sm:text-5xl">
+					{title}
+				</Heading>
+				<p class="mt-4 text-lg leading-relaxed text-ink/80">
+					De la consulta a la cirugía: todo lo que tu mascota necesita en un mismo lugar.
+				</p>
+			</div>
+		</Reveal>
+
+		<ServicesCarousel client:load />
+
+		{showLink && (
+			<div class="mt-12 flex justify-center">
+				<a
+					href="/servicios"
+					class="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-bold text-brand-deep transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+				>
+					Ver todos los servicios
+					<ArrowRight class="h-4 w-4" aria-hidden="true" />
+				</a>
+			</div>
+		)}
+	</div>
+</section>

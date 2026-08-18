@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Reveal from '../components/Reveal.tsx';
+import CaseCard from '../components/CaseCard.astro';
+import Footer from '../components/Footer.astro';
+import { caseStudies } from '../data/site';
+---
+
+<Layout
+	title="Casos Clínicos | Clínica Veterinaria Terranova"
+	description="Casos reales de nuestra práctica clínica: manejo quirúrgico de sarcoma en sitio de inyección (microchip) en Santino, felino."
+>
+	<Header />
+	<main>
+		<PageHeader
+			title="Casos Clínicos"
+			intro="Casos reales de nuestra práctica, contados con transparencia. Este espacio crece con cada caso que atendemos."
+		/>
+		<section class="bg-white py-16 lg:py-24">
+			<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
+				<div class="flex flex-col gap-10">
+					{caseStudies.map((caseItem) => (
+						<Reveal client:load>
+							<CaseCard caseItem={caseItem} />
+						</Reveal>
+					))}
+				</div>
+				<Reveal client:load delay={0.2}>
+					<p class="mt-14 rounded-[2rem] bg-cream px-6 py-8 text-center font-display text-xl font-semibold text-ink sm:text-2xl">
+						Cada caso que atendemos se suma a este espacio.
+					</p>
+				</Reveal>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>

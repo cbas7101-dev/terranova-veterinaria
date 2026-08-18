@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import AboutBlock from '../components/AboutBlock.astro';
+import CatBoutique from '../components/CatBoutique.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+	title="Nosotros | Clínica Veterinaria Terranova"
+	description="Servicio veterinario integral en Tumbaco: clínica, cirugía, emergencias, laboratorio, Rayos X y la única Cat Boutique del país."
+>
+	<Header />
+	<main>
+		<AboutBlock title="Nosotros" first />
+		<CatBoutique />
+	</main>
+	<Footer />
+</Layout>

@@ -1,0 +1,50 @@
+---
+import Reveal from './Reveal.tsx';
+import CaseCard from './CaseCard.astro';
+import { ArrowRight } from 'lucide-react';
+import { caseStudies } from '../data/site';
+
+interface Props {
+	/** En el home muestra el resumen con un enlace a la página completa */
+	preview?: boolean;
+}
+
+const { preview = false } = Astro.props;
+---
+
+<section class="bg-cream py-20 lg:py-28">
+	<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
+		<Reveal client:load>
+			<div class="max-w-2xl">
+				<h2 class="font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink sm:text-5xl">
+					Casos Clínicos
+				</h2>
+				<p class="mt-4 text-lg leading-relaxed text-ink/80">
+					Casos reales de nuestra práctica, contados con transparencia.
+				</p>
+			</div>
+		</Reveal>
+
+		<div class="mt-14 flex flex-col gap-10">
+			{caseStudies.map((caseItem) => (
+				<Reveal client:load delay={0.1}>
+					<CaseCard caseItem={caseItem} />
+				</Reveal>
+			))}
+		</div>
+
+		{preview && (
+			<Reveal client:load delay={0.2}>
+				<div class="mt-10">
+					<a
+						href="/casos-clinicos"
+						class="inline-flex items-center gap-2 rounded-full bg-brand-deep px-6 py-3 text-sm font-bold text-white shadow-lg shadow-brand-deep/25 transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+					>
+						Ver más casos clínicos
+						<ArrowRight class="h-4 w-4" />
+					</a>
+				</div>
+			</Reveal>
+		)}
+	</div>
+</section>

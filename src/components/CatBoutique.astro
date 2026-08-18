@@ -1,0 +1,47 @@
+---
+import Reveal from './Reveal.tsx';
+import WhatsAppPill from './WhatsAppPill.astro';
+import { Cat } from 'lucide-react';
+import { site } from '../data/site';
+---
+
+<section class="bg-cream py-20 lg:py-28">
+	<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
+		<Reveal client:load>
+			<div class="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+				<img
+					src="https://picsum.photos/seed/terranova-cat-boutique/1000/1000"
+					alt="Gato disfrutando en la Cat Boutique de Terranova"
+					class="aspect-square w-full rounded-[2rem] object-cover"
+					width="1000"
+					height="1000"
+					loading="lazy"
+				/>
+				<div class="max-w-xl">
+					<span class="inline-flex items-center gap-2 rounded-full bg-mint px-4 py-1.5 text-sm font-bold text-ink">
+						<Cat class="h-4 w-4" />
+						Única a nivel nacional
+					</span>
+					<h2 class="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink sm:text-5xl">
+						La Cat Boutique
+					</h2>
+					<p class="mt-5 text-lg leading-relaxed text-ink/80">
+						Un espacio dedicado por completo al bienestar de los gatos: productos, accesorios y
+						cuidado pensados para ellos, algo que no encontrarás en ningún otro lugar del país.
+					</p>
+					<div class="mt-8 flex flex-wrap items-center gap-4">
+						<WhatsAppPill label="Pregunta por la Cat Boutique" />
+						<a
+							href={site.whatsappCatalog}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-center gap-2 rounded-full border-2 border-brand-deep px-6 py-3 text-sm font-bold text-brand-deep transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+						>
+							Ver catálogo en WhatsApp
+						</a>
+					</div>
+				</div>
+			</div>
+		</Reveal>
+	</div>
+</section>

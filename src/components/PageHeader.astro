@@ -1,0 +1,36 @@
+---
+import Reveal from './Reveal.tsx';
+
+interface Props {
+	title: string;
+	intro?: string;
+	/** Bloques de color para encabezados de páginas interiores */
+	bg?: 'cream' | 'mint' | 'teal' | 'petrol';
+}
+
+const { title, intro, bg = 'cream' } = Astro.props;
+
+const bgClass = {
+	cream: 'bg-cream text-ink',
+	mint: 'bg-mint text-ink',
+	teal: 'bg-brand text-white',
+	petrol: 'bg-brand-deep text-white',
+}[bg];
+
+const introClass = bg === 'cream' || bg === 'mint' ? 'text-ink/80' : 'text-white/90';
+---
+
+<header class={`${bgClass} pt-[72px]`}>
+	<div class="mx-auto max-w-[1400px] px-5 pb-12 pt-16 sm:px-8 lg:pb-16 lg:pt-20">
+		<Reveal client:load>
+			<h1 class="max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+				{title}
+			</h1>
+		</Reveal>
+		{intro && (
+			<Reveal client:load delay={0.1}>
+				<p class={`mt-5 max-w-2xl text-lg leading-relaxed ${introClass}`}>{intro}</p>
+			</Reveal>
+		)}
+	</div>
+</header>

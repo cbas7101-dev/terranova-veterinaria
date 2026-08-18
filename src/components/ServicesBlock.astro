@@ -1,0 +1,131 @@
+---
+import Reveal from './Reveal.tsx';
+import WhatsAppPill from './WhatsAppPill.astro';
+import {
+	Stethoscope,
+	Brain,
+	HeartPulse,
+	FlaskConical,
+	ScanLine,
+	Syringe,
+	ShoppingBag,
+	Scissors,
+	Cat,
+	ArrowRight,
+} from 'lucide-react';
+import { serviceGroups } from '../data/site';
+
+interface Props {
+	/** En el home muestra el resumen con un enlace a la página completa */
+	preview?: boolean;
+	/** Oculta el encabezado propio cuando la página ya trae un encabezado */
+	withHeading?: boolean;
+}
+
+const { preview = false, withHeading = true } = Astro.props;
+
+const icons = {
+	stethoscope: Stethoscope,
+	brain: Brain,
+	'heart-pulse': HeartPulse,
+	'flask-conical': FlaskConical,
+	'scan-line': ScanLine,
+	syringe: Syringe,
+	'shopping-bag': ShoppingBag,
+	scissors: Scissors,
+	cat: Cat,
+} as const;
+---
+
+<section class="bg-mint py-20 lg:py-28">
+	<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
+		{withHeading && (
+			<Reveal client:load>
+				<div class="max-w-2xl">
+					<h2 class="font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink sm:text-5xl">
+						Servicios integrales
+					</h2>
+					<p class="mt-4 text-lg leading-relaxed text-ink/80">
+						De la consulta a la cirugía: todo lo que tu mascota necesita en un mismo lugar.
+					</p>
+				</div>
+			</Reveal>
+		)}
+
+		<Reveal client:load delay={0.1}>
+			<div class="mt-14 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+				<div class="flex flex-col gap-10">
+					{serviceGroups.map((group) => (
+						<div>
+							<h3 class="text-sm font-bold uppercase tracking-wide text-ink/90">{group.label}</h3>
+							<ul class="mt-5 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+								{group.services.map((service) => {
+									const Icon = icons[service.icon as keyof typeof icons];
+									if (service.highlight) {
+										return (
+											<li class="rounded-2xl bg-brand-deep p-5 sm:col-span-2">
+												<div class="flex gap-4">
+													<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-mint text-brand-deep">
+														<Icon class="h-5 w-5" />
+													</span>
+													<div>
+														<div class="flex flex-wrap items-center gap-2">
+															<h4 class="text-lg font-bold text-white">{service.title}</h4>
+															<span class="rounded-full bg-mint px-3 py-1 text-xs font-bold text-ink">
+																Única a nivel nacional
+															</span>
+														</div>
+														<p class="mt-1 text-[15px] leading-relaxed text-white/90">
+															{service.description}
+														</p>
+													</div>
+												</div>
+											</li>
+										);
+									}
+									return (
+										<li class="flex gap-3">
+											<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-brand-deep">
+												<Icon class="h-5 w-5" />
+											</span>
+											<div>
+												<h4 class="text-[17px] font-bold text-ink">{service.title}</h4>
+												<p class="mt-1 text-sm leading-relaxed text-ink/80">{service.description}</p>
+											</div>
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+					))}
+				</div>
+
+				<div class="lg:sticky lg:top-24 lg:self-start">
+					<img
+						src="https://picsum.photos/seed/terranova-clinica-veterinaria/900/1200"
+						alt="Fotografía de la clínica veterinaria Terranova"
+						class="aspect-[3/4] w-full rounded-[2rem] object-cover"
+						width="900"
+						height="1200"
+						loading="lazy"
+					/>
+					<p class="mt-4 text-sm font-medium text-ink/80">
+						Consultas, laboratorio, Rayos X y quirófano en un mismo lugar.
+					</p>
+					<div class="mt-6 flex flex-wrap items-center gap-4">
+						<WhatsAppPill label="Agenda una consulta" />
+						{preview && (
+							<a
+								href="/servicios"
+								class="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-brand-deep transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+							>
+								Ver todos los servicios
+								<ArrowRight class="h-4 w-4" />
+							</a>
+						)}
+					</div>
+				</div>
+			</div>
+		</Reveal>
+	</div>
+</section>

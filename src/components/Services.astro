@@ -1,0 +1,98 @@
+---
+import Reveal from './Reveal.tsx';
+import {
+	Stethoscope,
+	Brain,
+	HeartPulse,
+	FlaskConical,
+	ScanLine,
+	Syringe,
+	ShoppingBag,
+	Scissors,
+	Cat,
+} from 'lucide-react';
+import { serviceGroups } from '../data/site';
+
+const icons = {
+	stethoscope: Stethoscope,
+	brain: Brain,
+	'heart-pulse': HeartPulse,
+	'flask-conical': FlaskConical,
+	'scan-line': ScanLine,
+	syringe: Syringe,
+	'shopping-bag': ShoppingBag,
+	scissors: Scissors,
+	cat: Cat,
+} as const;
+---
+
+<section id="servicios" class="bg-white py-20 lg:py-28">
+	<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
+		<Reveal client:load>
+			<div class="max-w-2xl">
+				<h2 class="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+					Servicios integrales
+				</h2>
+				<p class="mt-4 text-lg text-gray-600">
+					De la consulta a la cirugía: todo lo que tu mascota necesita en un mismo lugar.
+				</p>
+			</div>
+		</Reveal>
+
+		<Reveal client:load delay={0.1}>
+			<div class="mt-14 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+				<div class="flex flex-col gap-10">
+					{serviceGroups.map((group) => (
+						<div>
+							<h3 class="text-sm font-bold text-brand-deep">{group.label}</h3>
+							<ul class="mt-5 flex flex-col gap-7">
+								{group.services.map((service) => {
+									const Icon = icons[service.icon as keyof typeof icons];
+									return (
+										<li class="flex gap-4">
+											<span
+												class:list={[
+													'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl',
+													service.highlight ? 'bg-brand text-white' : 'bg-mint/40 text-brand-deep',
+												]}
+											>
+												<Icon class="h-6 w-6" />
+											</span>
+											<div>
+												<div class="flex flex-wrap items-center gap-2">
+													<h4 class="text-lg font-bold text-ink">{service.title}</h4>
+													{service.highlight && (
+														<span class="rounded-full bg-mint px-3 py-1 text-xs font-bold text-ink">
+															Única a nivel nacional
+														</span>
+													)}
+												</div>
+												<p class="mt-1 max-w-md text-[15px] leading-relaxed text-gray-600">
+													{service.description}
+												</p>
+											</div>
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+					))}
+				</div>
+
+				<div class="lg:sticky lg:top-24 lg:self-start">
+					<img
+						src="https://picsum.photos/seed/terranova-clinica-veterinaria/900/1200"
+						alt="Fotografía de la clínica veterinaria Terranova"
+						class="aspect-[3/4] w-full rounded-[2rem] object-cover shadow-xl shadow-brand-deep/15"
+						width="900"
+						height="1200"
+						loading="lazy"
+					/>
+					<p class="mt-4 text-sm text-gray-600">
+						Consultas, laboratorio, Rayos X y quirófano en un mismo lugar.
+					</p>
+				</div>
+			</div>
+		</Reveal>
+	</div>
+</section>

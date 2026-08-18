@@ -1,0 +1,103 @@
+---
+import Reveal from './Reveal.tsx';
+import WhatsAppPill from './WhatsAppPill.astro';
+import { ShieldCheck, FlaskConical, ScanLine, Cat, ArrowRight } from 'lucide-react';
+
+interface Props {
+	title?: string;
+	/** En el home muestra el resumen con un enlace a la página completa */
+	preview?: boolean;
+	/** Cuando el bloque abre la página, compensa el header fijo */
+	first?: boolean;
+}
+
+const { title = 'Por qué Terranova', preview = false, first = false } = Astro.props;
+
+const points = [
+	{
+		icon: ShieldCheck,
+		title: 'Atención integral',
+		description: 'Clínica, cirugía y emergencias bajo un mismo techo.',
+	},
+	{
+		icon: FlaskConical,
+		title: 'Laboratorio propio',
+		description: 'Hematología y química sanguínea para diagnósticos precisos.',
+	},
+	{
+		icon: ScanLine,
+		title: 'Rayos X de última generación',
+		description: 'Diagnóstico por imagen con equipos modernos.',
+	},
+	{
+		icon: Cat,
+		title: 'Cat Boutique',
+		description: 'Única a nivel nacional, dedicada al bienestar de los gatos.',
+	},
+];
+---
+
+<section
+	class:list={['bg-brand', first ? 'pb-20 pt-[8rem] lg:pb-28 lg:pt-[9rem]' : 'py-20 lg:py-28']}
+>
+	<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
+		<Reveal client:load>
+			<div class="max-w-2xl">
+				<h2 class="font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl">
+					{title}
+				</h2>
+				<p class="mt-4 text-lg leading-relaxed text-white/90">
+					Un servicio veterinario integral, con la única Cat Boutique del país.
+				</p>
+			</div>
+		</Reveal>
+
+		<Reveal client:load delay={0.1}>
+			<div class="mt-14 grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+				<div class="flex flex-col gap-8">
+					<p class="max-w-xl text-xl font-bold leading-relaxed text-white">
+						Un servicio veterinario integral, con la única Cat Boutique del país.
+					</p>
+
+					<ul class="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+						{points.map((point) => (
+							<li class="flex gap-3">
+								<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white">
+									<point.icon class="h-5 w-5" />
+								</span>
+								<div>
+									<h3 class="font-bold text-white">{point.title}</h3>
+									<p class="mt-1 text-sm leading-relaxed text-white/85">{point.description}</p>
+								</div>
+							</li>
+						))}
+					</ul>
+
+					<div class="flex flex-wrap items-center gap-4">
+						<WhatsAppPill variant="mint" label="Conoce nuestros servicios" />
+						{preview && (
+							<a
+								href="/nosotros"
+								class="inline-flex items-center gap-2 rounded-full border-2 border-white px-6 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+							>
+								Conócenos
+								<ArrowRight class="h-4 w-4" />
+							</a>
+						)}
+					</div>
+				</div>
+
+				<div class="lg:sticky lg:top-24 lg:self-start">
+					<img
+						src="https://picsum.photos/seed/terranova-equipo-veterinario/900/1100"
+						alt="Equipo veterinario de Terranova junto a una mascota"
+						class="aspect-[4/5] w-full rounded-[2rem] object-cover"
+						width="900"
+						height="1100"
+						loading="lazy"
+					/>
+				</div>
+			</div>
+		</Reveal>
+	</div>
+</section>
