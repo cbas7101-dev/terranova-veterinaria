@@ -1,15 +1,21 @@
 ---
 import Reveal from './Reveal.tsx';
 import WhatsAppPill from './WhatsAppPill.astro';
-import WhatsAppIcon from './icons/WhatsAppIcon.astro';
 import { PawPrint, ArrowRight } from 'lucide-react';
 import { site } from '../data/site';
 ---
 
-<section class="relative overflow-hidden bg-white">
-	<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
-		<div class="grid min-h-[100dvh] items-center gap-10 pt-24 pb-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24">
-			<div class="max-w-xl">
+<section
+	class="relative min-h-[100dvh] overflow-hidden bg-white bg-[url('/fondo.jpg')] bg-cover bg-center"
+>
+	<div
+		class="absolute inset-0 bg-gradient-to-br from-white via-white/65 to-transparent"
+		aria-hidden="true"
+	></div>
+
+	<div class="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-8">
+		<div class="flex min-h-[100dvh] flex-col justify-center pt-24 pb-16 lg:pb-24">
+			<div class="max-w-2xl">
 				<Reveal client:load>
 					<span
 						class="inline-flex items-center gap-2 rounded-full bg-mint px-4 py-1.5 text-sm font-bold text-ink"
@@ -44,17 +50,6 @@ import { site } from '../data/site';
 						</a>
 					</div>
 				</Reveal>
-			</div>
-
-			<div class="lg:self-stretch lg:-mr-[max(0px,calc((100vw-1400px)/2+2rem))]">
-				<img
-					src="https://picsum.photos/seed/terranova-hero-consulta-mascota/1000/1200"
-					alt="Veterinaria en consulta con una mascota"
-					class="h-[420px] w-full object-cover sm:h-[520px] lg:h-full lg:min-h-[680px]"
-					width="1000"
-					height="1200"
-					fetchpriority="high"
-				/>
 			</div>
 		</div>
 	</div>
