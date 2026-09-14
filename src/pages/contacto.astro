@@ -3,11 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import ContactBlock from '../components/ContactBlock.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
 ---
 
 <Layout
-	title="Contacto y ubicación | Clínica Veterinaria Terranova"
-	description="Visítanos en Los Arupos S4-143 y de los Cipreses, Tumbaco. Escríbenos por WhatsApp, Instagram o Facebook."
+	title={`Contacto y ubicación | ${site.name}`}
+	description={`${site.contact.intro} ${site.contact.address}. Teléfono ${site.contact.phoneDisplay}, WhatsApp ${site.contact.whatsappDisplay}.`}
 >
 	<Header />
 	<main>

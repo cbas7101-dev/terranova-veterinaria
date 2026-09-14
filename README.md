@@ -1,46 +1,44 @@
-# Astro Starter Kit: Basics
+# Plantilla web para clínicas veterinarias · Instancia: SERVICAN
 
-```sh
-npm create astro@latest -- --template basics
-```
+Sitio de una página múltiples secciones (Astro + React + Tailwind v4 + GSAP),
+convertido en plantilla reutilizable para clientes del rubro pet:
+veterinarias, peluquerías caninas y hospedaje de mascotas.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Cómo instanciar un nuevo cliente
 
-## 🚀 Project Structure
+Todo el contenido vive en un único archivo tipado:
+[`src/data/site.ts`](src/data/site.ts). Sin tocar componentes puedes cambiar:
 
-Inside of your Astro project, you'll see the following folders and files:
+- **Identidad**: nombre, subtítulo, logo (`public/`), metadatos SEO.
+- **Colores de marca**: `site.theme` (brand, brandDeep, mint, cream, ink).
+  Se inyectan como variables CSS en runtime desde `Layout.astro`;
+  `src/styles/global.css` solo mantiene los fallbackos de build.
+- **Hero**: badge, título (con palabra resaltada), subtítulo e imagen de fondo.
+- **Servicios**: arreglo libre de categorías (título, ícono, badge opcional,
+  descripción, imagen). El carrusel se adapa a la cantidad de ítems.
+  Íconos disponibles en `src/components/servicesIcons.ts`.
+- **Por qué [marca]**: lead, features (ícono + título + descripción) e imagen.
+- **Contacto**: dirección, teléfono, WhatsApp, email, horario, redes sociales
+  (opcionales, omitir las que no existan), catálogo de WhatsApp (opcional)
+  y embed de Google Maps.
+- **Casos Clínicos**: `site.cases.enabled` (por defecto `false`). Al activarlo
+  aparecen el enlace de nav, el bloque del home y la página `/casos-clinicos`
+  (usa `caseStudies` del mismo archivo; sin activar, la página redirige a `/`).
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+Imágenes placeholder vía [placehold.co](https://placehold.co) hasta tener
+fotos reales del cliente.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Comandos
 
-## 🧞 Commands
+| Comando           | Acción                                            |
+| :---------------- | :------------------------------------------------ |
+| `npm install`     | Instala dependencias                              |
+| `npm run dev`     | Dev server en `localhost:4321`                    |
+| `npm run build`   | Build de producción a `./dist/`                   |
+| `npm run preview` | Preview del build                                 |
+| `node scripts/verify.mjs` | QA visual + funcional con Puppeteer (requiere dev server activo) |
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+El QA genera capturas full-page desktop (1440px) y mobile (390px) en
+`screenshots/` y valida: paleta por sección, contraste, overflow, carrusel,
+nav, redirección de Casos Clínicos y ausencia de contenido de la marca
+original de la plantilla.

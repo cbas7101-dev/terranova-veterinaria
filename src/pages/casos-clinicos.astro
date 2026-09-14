@@ -5,19 +5,21 @@ import PageHeader from '../components/PageHeader.astro';
 import Reveal from '../components/Reveal.tsx';
 import CaseCard from '../components/CaseCard.astro';
 import Footer from '../components/Footer.astro';
-import { caseStudies } from '../data/site';
+import { caseStudies, site } from '../data/site';
+
+// Sección opcional: solo se sirve si el cliente la tiene activada en el config
+if (!site.cases.enabled) {
+	return Astro.redirect('/', 302);
+}
 ---
 
 <Layout
-	title="Casos Clínicos | Clínica Veterinaria Terranova"
-	description="Casos reales de nuestra práctica clínica: manejo quirúrgico de sarcoma en sitio de inyección (microchip) en Santino, felino."
+	title={`${site.cases.title} | ${site.name}`}
+	description={site.cases.intro}
 >
 	<Header />
 	<main>
-		<PageHeader
-			title="Casos Clínicos"
-			intro="Casos reales de nuestra práctica, contados con transparencia. Este espacio crece con cada caso que atendemos."
-		/>
+		<PageHeader title={site.cases.title} intro={site.cases.intro} />
 		<section class="bg-white py-16 lg:py-24">
 			<div class="mx-auto max-w-[1400px] px-5 sm:px-8">
 				<div class="flex flex-col gap-10">

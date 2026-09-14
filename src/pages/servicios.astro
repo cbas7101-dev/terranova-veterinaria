@@ -3,11 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import ServicesSection from '../components/ServicesSection.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+const servicesList = site.services.categories.map((c) => c.title).join(', ');
 ---
 
 <Layout
-	title="Servicios | Clínica Veterinaria Terranova"
-	description="Consulta y domicilios, laboratorio, Rayos X, cirugía, emergencias, pet shop, peluquería y la única Cat Boutique del país."
+	title={`Servicios | ${site.name}`}
+	description={`${servicesList}. ${site.services.subtitle}`}
 >
 	<Header />
 	<main>

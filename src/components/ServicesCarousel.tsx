@@ -2,13 +2,14 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronLeft, ChevronRight, ArrowRight, Stethoscope } from 'lucide-react';
-import { serviceCategories, type ServiceCategory } from '../data/site';
+import { site, type ServiceCategory } from '../data/site';
 import { SERVICE_ICONS } from './servicesIcons';
 import ServicesDetail from './ServicesDetail';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const GAP = 24;
+const serviceCategories = site.services.categories;
 
 export default function ServicesCarousel() {
 	const [selected, setSelected] = useState<ServiceCategory | null>(null);

@@ -1,11 +1,18 @@
 @import "tailwindcss";
 
+/*
+ * Tokens de marca: las claves deben existir aqui para que Tailwind v4
+ * genere las utilidades (bg-brand, text-mint, ...). Los valores reales
+ * se inyectan en runtime desde src/data/site.ts (site.theme) en
+ * Layout.astro, de modo que recolorear un cliente = editar el config.
+ * Mantener estos fallbacks sincronizados con el config por defecto.
+ */
 @theme {
-	--color-brand: #2e9689;
-	--color-brand-deep: #1c7a94;
-	--color-mint: #88d9c6;
-	--color-cream: #f7f5ef;
-	--color-ink: #2d2d2d;
+	--color-brand: #5e8232;
+	--color-brand-deep: #4f413b;
+	--color-mint: #d9e8c4;
+	--color-cream: #f6f4ea;
+	--color-ink: #3a322d;
 
 	--font-display: "Fredoka Variable", "Fredoka", ui-rounded, system-ui, sans-serif;
 	--font-body: "Outfit Variable", "Outfit", system-ui, sans-serif;

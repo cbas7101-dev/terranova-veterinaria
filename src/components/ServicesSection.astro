@@ -2,6 +2,7 @@
 import Reveal from './Reveal.tsx';
 import ServicesCarousel from './ServicesCarousel';
 import { PawPrint, ArrowRight } from 'lucide-react';
+import { site } from '../data/site';
 
 interface Props {
 	/** Título del encabezado de la sección */
@@ -35,7 +36,7 @@ const Heading = level;
 					{title}
 				</Heading>
 				<p class="mt-4 text-lg leading-relaxed text-ink/80">
-					De la consulta a la cirugía: todo lo que tu mascota necesita en un mismo lugar.
+					{site.services.subtitle}
 				</p>
 			</div>
 		</Reveal>

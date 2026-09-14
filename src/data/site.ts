@@ -1,181 +1,119 @@
-export const site = {
-	name: 'Terranova Servicios Veterinarios',
-	legalName: 'Clínica Veterinaria Terranova',
-	tagline: 'Cuidamos con amor',
-	address: 'Los Arupos S4-143 y de los Cipreses, Tumbaco, Pichincha, Ecuador',
-	phoneDisplay: '+593 99 579 3846',
-	whatsapp: 'https://wa.me/593995793846',
-	whatsappCatalog: 'https://wa.me/c/593995793846',
-	instagram: 'https://www.instagram.com/terranovaservet/',
-	facebook: 'https://www.facebook.com/terranovaservet/',
-	mapsEmbed:
-		'https://www.google.com/maps?q=Los%20Arupos%20S4-143%20y%20de%20los%20Cipreses%2C%20Tumbaco%2C%20Ecuador&z=16&output=embed',
-} as const;
+/**
+ * Configuración única del sitio (plantilla reutilizable).
+ * Cambia estos valores para instanciar un nuevo cliente:
+ * identidad, colores, servicios, textos, contacto y flags de secciones.
+ */
 
-export type ServiceGroup = {
-	label: string;
-	services: Service[];
+export type ThemeConfig = {
+	/** Color de marca principal (fondos de bloque claro-oscuro, selección) */
+	brand: string;
+	/** Color profundo (header, footer, fondos oscuros, botones primarios) */
+	brandDeep: string;
+	/** Acento claro (fondos de secciones suaves) */
+	mint: string;
+	/** Fondo crema para secciones neutras */
+	cream: string;
+	/** Color de texto principal */
+	ink: string;
+};
+
+export type HeroConfig = {
+	/** Etiqueta superior (badge) del hero */
+	badge: string;
+	/** Título principal (parte sin resaltar) */
+	title: string;
+	/** Palabra final del título, resaltada con el color de marca */
+	titleHighlight: string;
+	/** Párrafo de apoyo */
+	subtitle: string;
+	/** Imagen de fondo del hero */
+	image: string;
 };
 
 export type Service = {
 	title: string;
 	description: string;
+	/** Clave de icono ver servicesIcons.ts */
 	icon: string;
-	highlight?: boolean;
 };
-
-export const serviceGroups: ServiceGroup[] = [
-	{
-		label: 'Atención clínica',
-		services: [
-			{
-				title: 'Consultas y Domicilios',
-				description: 'Atención en la clínica o a domicilio para el cuidado de tu mascota.',
-				icon: 'stethoscope',
-			},
-			{
-				title: 'Especialidades',
-				description: 'Atención especializada según la necesidad de cada paciente.',
-				icon: 'brain',
-			},
-			{
-				title: 'Emergencias',
-				description: 'Atención de urgencias para actuar rápido cuando más se necesita.',
-				icon: 'heart-pulse',
-			},
-		],
-	},
-	{
-		label: 'Diagnóstico y cirugía',
-		services: [
-			{
-				title: 'Laboratorio',
-				description: 'Hematología y química sanguínea para un diagnóstico preciso.',
-				icon: 'flask-conical',
-			},
-			{
-				title: 'Rayos X',
-				description: 'Equipos de última generación para diagnóstico por imagen confiable.',
-				icon: 'scan-line',
-			},
-			{
-				title: 'Cirugía',
-				description: 'Procedimientos quirúrgicos con protocolos seguros y seguimiento cercano.',
-				icon: 'syringe',
-			},
-		],
-	},
-	{
-		label: 'Bienestar y estilo',
-		services: [
-			{
-				title: 'Pet Shop',
-				description: 'Productos y accesorios para el bienestar diario de tu mascota.',
-				icon: 'shopping-bag',
-			},
-			{
-				title: 'Peluquería y baños medicados',
-				description: 'Grooming y baños medicados para una piel y un pelaje saludables.',
-				icon: 'scissors',
-			},
-			{
-				title: 'Cat Boutique',
-				description: 'Boutique dedicada a los gatos, única a nivel nacional.',
-				icon: 'cat',
-				highlight: true,
-			},
-		],
-	},
-];
 
 export type ServiceCategory = {
 	id: string;
 	title: string;
+	/** Clave de icono ver servicesIcons.ts */
 	icon: string;
+	/** Badge opcional (p. ej. "Único en la ciudad") */
 	badge?: string;
 	description: string;
+	/** Imagen vertical 4:5 de la vista detalle */
 	image: string;
 	services: Service[];
 };
 
-export const serviceCategories: ServiceCategory[] = [
-	{
-		id: 'atencion-clinica',
-		title: 'Atención Clínica',
-		icon: 'stethoscope',
-		description: 'Consultas, emergencias y especialidades para cuidar de tu mascota.',
-		image: 'https://picsum.photos/seed/terranova-consulta-veterinaria/900/1100',
-		services: [
-			{
-				title: 'Consultas y Domicilios',
-				description: 'Atención en la clínica o a domicilio para el cuidado de tu mascota.',
-				icon: 'stethoscope',
-			},
-			{
-				title: 'Emergencias',
-				description: 'Atención de urgencias para actuar rápido cuando más se necesita.',
-				icon: 'heart-pulse',
-			},
-			{
-				title: 'Especialidades',
-				description: 'Atención especializada según la necesidad de cada paciente.',
-				icon: 'brain',
-			},
-		],
-	},
-	{
-		id: 'diagnostico-cirugia',
-		title: 'Diagnóstico y Cirugía',
-		icon: 'scan-line',
-		description: 'Diagnóstico preciso y procedimientos con protocolos seguros.',
-		image: 'https://picsum.photos/seed/terranova-diagnostico-rayos-x/900/1100',
-		services: [
-			{
-				title: 'Laboratorio',
-				description: 'Hematología y química sanguínea para un diagnóstico preciso.',
-				icon: 'flask-conical',
-			},
-			{
-				title: 'Rayos X',
-				description: 'Equipos de última generación para diagnóstico por imagen confiable.',
-				icon: 'scan-line',
-			},
-			{
-				title: 'Cirugía',
-				description: 'Procedimientos quirúrgicos con protocolos seguros y seguimiento cercano.',
-				icon: 'syringe',
-			},
-		],
-	},
-	{
-		id: 'bienestar-estilo',
-		title: 'Bienestar y Estilo',
-		icon: 'scissors',
-		description: 'Productos y grooming para el bienestar y el estilo de tu mascota.',
-		image: 'https://picsum.photos/seed/terranova-peluqueria-petshop/900/1100',
-		services: [
-			{
-				title: 'Pet Shop',
-				description: 'Productos y accesorios para el bienestar diario de tu mascota.',
-				icon: 'shopping-bag',
-			},
-			{
-				title: 'Peluquería y baños medicados',
-				description: 'Grooming y baños medicados para una piel y un pelaje saludables.',
-				icon: 'scissors',
-			},
-		],
-	},
-	{
-		id: 'cat-boutique',
-		title: 'Cat Boutique',
-		icon: 'cat',
-		badge: 'Única a nivel nacional',
-		description: 'Boutique dedicada a los gatos, única a nivel nacional.',
-		image: 'https://picsum.photos/seed/terranova-cat-boutique/900/1100',
-		services: [],
-	},
-];
+export type ServicesConfig = {
+	/** Subtítulo de la sección de servicios */
+	subtitle: string;
+	categories: ServiceCategory[];
+};
+
+export type Feature = {
+	/** Clave de icono ver servicesIcons.ts */
+	icon: string;
+	title: string;
+	description: string;
+};
+
+export type AboutConfig = {
+	/** Título de la sección (p. ej. "Por qué SERVICAN") */
+	title: string;
+	/** Subtítulo bajo el título */
+	subtitle: string;
+	/** Frase destacada en negrita */
+	lead: string;
+	features: Feature[];
+	/** Imagen vertical 4:5 */
+	image: string;
+	imageAlt: string;
+};
+
+export type ScheduleLine = {
+	days: string;
+	hours: string;
+};
+
+export type SocialId = 'instagram' | 'facebook';
+
+export type SocialLink = {
+	id: SocialId;
+	href: string;
+	/** Texto visible (p. ej. @usuario) */
+	handle: string;
+};
+
+export type ContactConfig = {
+	/** Subtítulo de la sección de contacto */
+	intro: string;
+	address: string;
+	mapsEmbed: string;
+	mapsTitle: string;
+	phoneDisplay: string;
+	phoneHref: string;
+	whatsappDisplay: string;
+	whatsapp: string;
+	email: string;
+	schedule: ScheduleLine[];
+	/** Redes sociales opcionales: omitir las que el cliente no tenga */
+	socials: SocialLink[];
+	/** URL de catálogo de WhatsApp opcional */
+	catalogUrl?: string;
+};
+
+export type CasesConfig = {
+	/** Activa nav + página + bloque del home de Casos Clínicos */
+	enabled: boolean;
+	title: string;
+	intro: string;
+};
 
 export type SurgeryPhase = {
 	name: string;
@@ -196,38 +134,195 @@ export type CaseStudy = {
 	image: string;
 };
 
-export const caseStudies: CaseStudy[] = [
-	{
-		id: 'santino-sarcoma-microchip',
-		title: 'Manejo quirúrgico de sarcoma en sitio de inyección (microchip)',
-		patient: 'Santino',
-		species: 'Felino',
-		tags: ['Oncología Veterinaria', 'Cirugía', 'Felinos'],
-		protocol:
-			'Exámenes sanguíneos y radiografías de control con medio de contraste, para visualizar y evaluar los ganglios centinelas: clave para una correcta estadificación y para descartar metástasis antes de operar.',
-		surgeryTitle: 'Cirugía en dos fases',
-		phases: [
+export type SiteConfig = {
+	/** Nombre corto de marca (header, footer) */
+	name: string;
+	/** Subtítulo bajo el nombre (header, footer) */
+	subtitle: string;
+	/** Nombre legal para el copyright */
+	legalName: string;
+	/** Logo en public/ */
+	logo: string;
+	/** Alt del logo */
+	logoAlt: string;
+	meta: {
+		title: string;
+		description: string;
+	};
+	theme: ThemeConfig;
+	hero: HeroConfig;
+	services: ServicesConfig;
+	about: AboutConfig;
+	contact: ContactConfig;
+	cases: CasesConfig;
+	footer: {
+		description: string;
+	};
+};
+
+export const site: SiteConfig = {
+	name: 'SERVICAN',
+	subtitle: 'Clínica Veterinaria y Peluquería Canina',
+	legalName: 'SERVICAN',
+	logo: '/logo.png',
+	logoAlt: 'Logo de SERVICAN, clínica veterinaria y peluquería canina',
+	meta: {
+		title: 'SERVICAN | Clínica Veterinaria y Peluquería Canina en Quito',
+		description:
+			'SERVICAN: clínica veterinaria, peluquería canina, hospedaje y farmacia en Quito. Desde 1999 cuidando a tu mascota con amor, fe y experiencia.',
+	},
+	theme: {
+		brand: '#5e8232',
+		brandDeep: '#4f413b',
+		mint: '#d9e8c4',
+		cream: '#f6f4ea',
+		ink: '#3a322d',
+	},
+	hero: {
+		badge: 'Desde 1999 cuidando a tu mascota',
+		title: 'Amor, fe y',
+		titleHighlight: 'experiencia',
+		subtitle:
+			'Clínica veterinaria, peluquería canina, hospedaje y farmacia en Quito. Amor, fe y experiencia al servicio de tu mascota.',
+		image: 'https://placehold.co/1920x1080/d9e8c4/5e8232/png?text=SERVICAN',
+	},
+	services: {
+		subtitle:
+			'Veterinaria, peluquería, hospedaje y farmacia: todo lo que tu mascota necesita en un mismo lugar.',
+		categories: [
 			{
-				name: 'Exéresis',
-				description:
-					'Extracción del tumor respetando márgenes quirúrgicos amplios, clave para el control local de la enfermedad.',
+				id: 'veterinaria',
+				title: 'Veterinaria',
+				icon: 'stethoscope',
+				description: 'Consultas médicas, vacunas y desparasitación para la salud de tu mascota.',
+				image:
+					'https://placehold.co/900x1100/f6f4ea/4f413b/png?text=Veterinaria',
+				services: [],
 			},
 			{
-				name: 'Reconstrucción',
-				description:
-					'Cirugía plástica reconstructiva mediante un colgajo de avance de patrón subdérmico monopediculado, que permitió cubrir la zona con piel vascularizada y sin tensión.',
+				id: 'peluqueria-canina',
+				title: 'Peluquería Canina',
+				icon: 'scissors',
+				description: 'Estética y bienestar para tu mascota.',
+				image:
+					'https://placehold.co/900x1100/f6f4ea/4f413b/png?text=Peluqueria+Canina',
+				services: [],
+			},
+			{
+				id: 'hospedaje',
+				title: 'Hospedaje',
+				icon: 'house',
+				description: 'Cuidado y alojamiento mientras viajas.',
+				image:
+					'https://placehold.co/900x1100/f6f4ea/4f413b/png?text=Hospedaje',
+				services: [],
+			},
+			{
+				id: 'farmacia-pet-shop',
+				title: 'Farmacia y Pet Shop',
+				icon: 'pill',
+				description: 'Productos y medicamentos a un clic.',
+				image:
+					'https://placehold.co/900x1100/f6f4ea/4f413b/png?text=Farmacia+y+Pet+Shop',
+				services: [],
 			},
 		],
-		result: 'Santino en recuperación, con controles evolucionando de forma excelente.',
-		quote: 'Mientras más rápido se diagnostica, el tratamiento es menos complicado e invasivo.',
-		image: '/caso1.jpeg',
 	},
-];
+	about: {
+		title: 'Por qué SERVICAN',
+		subtitle: 'Una clínica con historia, dedicada a cuidar a tu mascota como se merece.',
+		lead: 'Amor, fe y experiencia: desde 1999 cuidando a tu mascota.',
+		features: [
+			{
+				icon: 'calendar-check',
+				title: 'Desde 1999',
+				description: 'Más de 25 años de experiencia cuidando mascotas en Quito.',
+			},
+			{
+				icon: 'stethoscope',
+				title: 'Atención integral',
+				description: 'Veterinaria, peluquería, hospedaje y farmacia en un mismo lugar.',
+			},
+			{
+				icon: 'heart-pulse',
+				title: 'Amor y dedicación',
+				description: 'Cada mascota recibe un cuidado cercano y personalizado.',
+			},
+			{
+				icon: 'map-pin',
+				title: 'Ubicación de fácil acceso',
+				description: 'Av. Diego de Vásquez N77-424, en el norte de Quito.',
+			},
+		],
+		image: 'https://placehold.co/900x1100/d9e8c4/4f413b/png?text=SERVICAN',
+		imageAlt: 'Equipo de SERVICAN atendiendo a una mascota',
+	},
+	contact: {
+		intro: 'Visítanos en el norte de Quito o escríbenos por cualquiera de nuestros canales.',
+		address: 'Av. Diego de Vásquez N77-424, Quito 170303, Ecuador',
+		mapsEmbed:
+			'https://www.google.com/maps?q=Av.%20Diego%20de%20V%C3%A1squez%20N77-424%2C%20Quito%2C%20Ecuador&z=16&output=embed',
+		mapsTitle: 'Mapa de SERVICAN en Quito',
+		phoneDisplay: '(02) 247-7152',
+		phoneHref: 'tel:+59322477152',
+		whatsappDisplay: '+593 99 105 7501',
+		whatsapp: 'https://wa.me/593991057501',
+		email: 'gruposervican@gmail.com',
+		schedule: [
+			{ days: 'Lun - Sáb', hours: '8:00 - 20:00' },
+			{ days: 'Dom y feriados', hours: '9:00 - 19:00' },
+		],
+		socials: [],
+	},
+	cases: {
+		enabled: false,
+		title: 'Casos Clínicos',
+		intro:
+			'Casos reales de nuestra práctica, contados con transparencia. Este espacio crece con cada caso que atendemos.',
+	},
+	footer: {
+		description:
+			'Clínica veterinaria y peluquería canina en Quito. Desde 1999 cuidando a tu mascota con amor, fe y experiencia.',
+	},
+};
 
-export const navLinks = [
+/** Enlaces de navegación: Casos Clínicos solo aparece si está activado en el config */
+export const navLinks: { label: string; href: string }[] = [
 	{ label: 'Inicio', href: '/' },
 	{ label: 'Servicios', href: '/servicios' },
-	{ label: 'Casos Clínicos', href: '/casos-clinicos' },
+	...(site.cases.enabled
+		? [{ label: site.cases.title, href: '/casos-clinicos' }]
+		: []),
 	{ label: 'Nosotros', href: '/nosotros' },
 	{ label: 'Contacto', href: '/contacto' },
-] as const;
+];
+
+/**
+ * Casos clínicos de ejemplo (plantilla). Reemplazar con casos reales
+ * del cliente y activar `cases.enabled` en el config.
+ */
+export const caseStudies: CaseStudy[] = [
+	{
+		id: 'caso-ejemplo',
+		title: 'Ejemplo de caso clínico: título del procedimiento',
+		patient: 'Paciente',
+		species: 'Canino',
+		tags: ['Especialidad', 'Cirugía'],
+		protocol:
+			'Exámenes sanguíneos y radiografías de control para una correcta estadificación antes de operar.',
+		surgeryTitle: 'Procedimiento en dos fases',
+		phases: [
+			{
+				name: 'Fase 1',
+				description: 'Descripción de la primera fase del procedimiento.',
+			},
+			{
+				name: 'Fase 2',
+				description: 'Descripción de la segunda fase del procedimiento.',
+			},
+		],
+		result: 'Paciente en recuperación, con controles evolucionando de forma excelente.',
+		quote: 'Mientras más rápido se diagnostica, el tratamiento es menos invasivo.',
+		image: 'https://placehold.co/900x1100/f6f4ea/4f413b/png?text=Caso+clinico',
+	},
+];

@@ -3,7 +3,7 @@ import Reveal from './Reveal.tsx';
 import WhatsAppPill from './WhatsAppPill.astro';
 import InstagramIcon from './icons/InstagramIcon.astro';
 import FacebookIcon from './icons/FacebookIcon.astro';
-import { MapPin, MessageCircle, ExternalLink, ArrowRight } from 'lucide-react';
+import { MapPin, MessageCircle, ExternalLink, ArrowRight, Phone, Mail, Clock } from 'lucide-react';
 import { site } from '../data/site';
 
 interface Props {
@@ -14,6 +14,9 @@ interface Props {
 }
 
 const { preview = false, first = false } = Astro.props;
+const { contact } = site;
+
+const socialIcon = { instagram: InstagramIcon, facebook: FacebookIcon } as const;
 ---
 
 <section
@@ -26,7 +29,7 @@ const { preview = false, first = false } = Astro.props;
 					Ubicación y contacto
 				</h2>
 				<p class="mt-4 text-lg leading-relaxed text-white">
-					Visítanos en Tumbaco o escríbenos por cualquiera de nuestros canales.
+					{contact.intro}
 				</p>
 			</div>
 		</Reveal>
@@ -40,12 +43,22 @@ const { preview = false, first = false } = Astro.props;
 						</span>
 						<div>
 							<h3 class="text-lg font-bold text-white">Dirección</h3>
-							<p class="mt-1 text-[15px] leading-relaxed text-white">{site.address}</p>
+							<p class="mt-1 text-[15px] leading-relaxed text-white">{contact.address}</p>
 						</div>
 					</div>
 
+					<a href={contact.phoneHref} class="group flex gap-4">
+						<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white">
+							<Phone class="h-6 w-6" />
+						</span>
+						<div>
+							<h3 class="text-lg font-bold text-white group-hover:text-mint">Teléfono</h3>
+							<p class="mt-1 text-[15px] text-white">{contact.phoneDisplay}</p>
+						</div>
+					</a>
+
 					<a
-						href={site.whatsapp}
+						href={contact.whatsapp}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="group flex gap-4"
@@ -55,54 +68,72 @@ const { preview = false, first = false } = Astro.props;
 						</span>
 						<div>
 							<h3 class="text-lg font-bold text-white group-hover:text-mint">WhatsApp</h3>
-							<p class="mt-1 text-[15px] text-white">{site.phoneDisplay}</p>
+							<p class="mt-1 text-[15px] text-white">{contact.whatsappDisplay}</p>
 						</div>
 					</a>
 
-					<a
-						href={site.instagram}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="group flex gap-4"
-					>
+					<a href={`mailto:${contact.email}`} class="group flex gap-4">
 						<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white">
-							<InstagramIcon class="h-6 w-6" />
+							<Mail class="h-6 w-6" />
 						</span>
 						<div>
-							<h3 class="text-lg font-bold text-white group-hover:text-mint">Instagram</h3>
-							<p class="mt-1 text-[15px] text-white">@terranovaservet</p>
+							<h3 class="text-lg font-bold text-white group-hover:text-mint">Email</h3>
+							<p class="mt-1 text-[15px] text-white">{contact.email}</p>
 						</div>
 					</a>
 
-					<a
-						href={site.facebook}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="group flex gap-4"
-					>
+					<div class="flex gap-4">
 						<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white">
-							<FacebookIcon class="h-6 w-6" />
+							<Clock class="h-6 w-6" />
 						</span>
 						<div>
-							<h3 class="text-lg font-bold text-white group-hover:text-mint">Facebook</h3>
-							<p class="mt-1 text-[15px] text-white">Terranova Servicios Veterinarios</p>
+							<h3 class="text-lg font-bold text-white">Horario</h3>
+							{contact.schedule.map((line) => (
+								<p class="mt-1 text-[15px] leading-relaxed text-white">
+									{line.days}: {line.hours}
+								</p>
+							))}
 						</div>
-					</a>
+					</div>
 
-					<a
-						href={site.whatsappCatalog}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="group flex gap-4"
-					>
-						<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white">
-							<ExternalLink class="h-6 w-6" />
-						</span>
-						<div>
-							<h3 class="text-lg font-bold text-white group-hover:text-mint">Catálogo de WhatsApp</h3>
-							<p class="mt-1 text-[15px] text-white">Productos y servicios a un clic.</p>
-						</div>
-					</a>
+					{contact.socials.map((social) => {
+						const Icon = socialIcon[social.id];
+						return (
+							<a
+								href={social.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="group flex gap-4"
+							>
+								<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white">
+									<Icon class="h-6 w-6" />
+								</span>
+								<div>
+									<h3 class="text-lg font-bold text-white capitalize group-hover:text-mint">
+										{social.id}
+									</h3>
+									<p class="mt-1 text-[15px] text-white">{social.handle}</p>
+								</div>
+							</a>
+						);
+					})}
+
+					{contact.catalogUrl && (
+						<a
+							href={contact.catalogUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="group flex gap-4"
+						>
+							<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white">
+								<ExternalLink class="h-6 w-6" />
+							</span>
+							<div>
+								<h3 class="text-lg font-bold text-white group-hover:text-mint">Catálogo de WhatsApp</h3>
+								<p class="mt-1 text-[15px] text-white">Productos y servicios a un clic.</p>
+							</div>
+						</a>
+					)}
 
 					<div class="mt-2 flex flex-wrap items-center gap-4">
 						<WhatsAppPill variant="mint" label="Escríbenos por WhatsApp" size="lg" />
@@ -119,8 +150,8 @@ const { preview = false, first = false } = Astro.props;
 				</div>
 
 				<iframe
-					src={site.mapsEmbed}
-					title="Mapa de la Clínica Veterinaria Terranova en Tumbaco"
+					src={contact.mapsEmbed}
+					title={contact.mapsTitle}
 					class="h-[420px] w-full rounded-[2rem] border-0 shadow-xl shadow-brand-deep/40 lg:h-full lg:min-h-[520px]"
 					loading="lazy"
 					referrerpolicy="no-referrer-when-downgrade"

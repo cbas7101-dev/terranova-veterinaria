@@ -2,6 +2,7 @@
 import '@fontsource-variable/fredoka';
 import '@fontsource-variable/outfit';
 import '../styles/global.css';
+import { site } from '../data/site';
 
 interface Props {
 	title?: string;
@@ -9,9 +10,13 @@ interface Props {
 }
 
 const {
-	title = 'Terranova Servicios Veterinarios | Clínica Veterinaria en Tumbaco',
-	description = 'Clínica Veterinaria Terranova: consultas, cirugía, emergencias, laboratorio hematológico y Rayos X de última generación, con la única Cat Boutique del país. Tumbaco, Ecuador.',
+	title = site.meta.title,
+	description = site.meta.description,
 } = Astro.props;
+
+const { theme } = site;
+
+const themeCss = `html:root{--color-brand:${theme.brand};--color-brand-deep:${theme.brandDeep};--color-mint:${theme.mint};--color-cream:${theme.cream};--color-ink:${theme.ink};}`;
 ---
 
 <!doctype html>
@@ -19,16 +24,16 @@ const {
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" href={site.logo} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<meta name="theme-color" content="#2e9689" />
+		<meta name="theme-color" content={theme.brandDeep} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
-		<meta property="og:image" content="/logo.jpeg" />
+		<meta property="og:image" content={site.logo} />
+		<style is:inline set:html={themeCss} />
 	</head>
 	<body class="bg-white font-body text-ink">
 		<slot />

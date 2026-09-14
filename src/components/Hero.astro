@@ -3,10 +3,13 @@ import Reveal from './Reveal.tsx';
 import WhatsAppPill from './WhatsAppPill.astro';
 import { PawPrint, ArrowRight } from 'lucide-react';
 import { site } from '../data/site';
+
+const { hero } = site;
 ---
 
 <section
-	class="relative min-h-[100dvh] overflow-hidden bg-white bg-[url('/fondo.jpg')] bg-cover bg-center"
+	class="relative min-h-[100dvh] overflow-hidden bg-white bg-cover bg-center"
+	style={`background-image:url('${hero.image}')`}
 >
 	<div
 		class="absolute inset-0 bg-gradient-to-br from-white via-white/65 to-transparent"
@@ -21,26 +24,25 @@ import { site } from '../data/site';
 						class="inline-flex items-center gap-2 rounded-full bg-mint px-4 py-1.5 text-sm font-bold text-ink"
 					>
 						<PawPrint class="h-4 w-4" />
-						Clínica Veterinaria en Tumbaco
+						{hero.badge}
 					</span>
 				</Reveal>
 
 				<Reveal client:load delay={0.1}>
 					<h1 class="mt-6 font-display text-5xl font-bold leading-[0.95] tracking-tight text-ink sm:text-6xl lg:text-7xl">
-						Consiente a tu <span class="text-brand">mascota</span>
+						{hero.title} <span class="text-brand">{hero.titleHighlight}</span>
 					</h1>
 				</Reveal>
 
 				<Reveal client:load delay={0.2}>
 					<p class="mt-6 max-w-md text-lg leading-relaxed text-ink/80">
-						Cuidamos con amor. Clínica, cirugía, laboratorio y Rayos X de última generación, con
-						la única Cat Boutique del país.
+						{hero.subtitle}
 					</p>
 				</Reveal>
 
 				<Reveal client:load delay={0.3}>
 					<div class="mt-9 flex flex-wrap items-center gap-4">
-						<WhatsAppPill href={site.whatsapp} label="Escríbenos por WhatsApp" size="lg" />
+						<WhatsAppPill href={site.contact.whatsapp} label="Escríbenos por WhatsApp" size="lg" />
 						<a
 							href="/servicios"
 							class="inline-flex items-center gap-2 rounded-full border-2 border-brand-deep px-7 py-3.5 text-base font-bold text-brand-deep transition-transform hover:-translate-y-0.5 active:scale-[0.98]"

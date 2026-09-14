@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ArrowLeft, Stethoscope } from 'lucide-react';
-import type { ServiceCategory } from '../data/site';
+import { site, type ServiceCategory } from '../data/site';
 import { SERVICE_ICONS } from './servicesIcons';
 
 interface Props {
@@ -85,7 +85,7 @@ export default function ServicesDetail({ category, onBack }: Props) {
 				<div className="detail-anim-img">
 					<img
 						src={category.image}
-						alt={`${category.title} en Terranova Servicios Veterinarios`}
+						alt={`${category.title} en ${site.name}`}
 						width="900"
 						height="1100"
 						loading="eager"

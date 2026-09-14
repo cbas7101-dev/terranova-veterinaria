@@ -105,23 +105,28 @@ const ROUTES = [
 	{
 		path: '/',
 		name: 'index',
-		sectionColors: ['rgb(255,255,255)', 'rgb(136,217,198)', 'rgb(46,150,137)', 'rgb(247,245,239)', 'rgb(28,122,148)'],
+		sectionColors: ['rgb(255,255,255)', 'rgb(217,232,196)', 'rgb(94,130,50)', 'rgb(79,65,59)'],
 		carousel: true,
 		home: true,
 	},
-	{ path: '/servicios', name: 'servicios', sectionColors: ['rgb(136,217,198)'], carousel: true },
-	{ path: '/casos-clinicos', name: 'casos', sectionColors: ['rgb(255,255,255)'] },
-	{ path: '/nosotros', name: 'nosotros', sectionColors: ['rgb(46,150,137)', 'rgb(247,245,239)'] },
-	{ path: '/contacto', name: 'contacto', sectionColors: ['rgb(28,122,148)'] },
+	{ path: '/servicios', name: 'servicios', sectionColors: ['rgb(217,232,196)'], carousel: true },
+	{ path: '/nosotros', name: 'nosotros', sectionColors: ['rgb(94,130,50)'] },
+	{ path: '/contacto', name: 'contacto', sectionColors: ['rgb(79,65,59)'] },
 ];
 
 for (const route of ROUTES) {
 	console.log(`\n=== ${route.name} (${route.path}) ===`);
 	await load(route.path, 1440);
 
-	// 1. Em-dash ban
+	// 1. Em-dash ban + no leftover brand content from the template's origin
 	const emDash = await page.evaluate(() => document.body.innerText.includes('\u2014'));
 	check('Zero em-dashes in visible text', !emDash);
+
+	const leftovers = await page.evaluate(() => {
+		const text = document.body.innerText.toLowerCase();
+		return ['terranova', 'cat boutique', 'tumbaco', 'terranovaservet'].filter((w) => text.includes(w));
+	});
+	check('No Terranova/Cat Boutique leftover text', leftovers.length === 0, leftovers.join(', '));
 
 	// 2. Section color sequence (whole-block palette)
 	const sectionColors = await page.evaluate(() => {
@@ -152,7 +157,11 @@ for (const route of ROUTES) {
 		};
 	});
 	check('Header height <= 80px', header.height <= 80, `${header.height}px`);
-	check('Nav has 5 links, single line', header.linkCount === 5 && header.sameLine, `links=${header.linkCount}`);
+	check(
+		'Nav has 4 links (Casos Clínicos off), single line',
+		header.linkCount === 4 && header.sameLine,
+		`links=${header.linkCount}`
+	);
 	check('Active nav link matches route', header.activeHref === route.path, `active=${header.activeHref}`);
 
 	// 4. Per-section contrast (heading + paragraph)
@@ -193,9 +202,9 @@ for (const route of ROUTES) {
 		if (sec.para) {
 			const fg = blend(parseColor(sec.para[0]), bg);
 			const ratio = contrast(fg, bg);
-			// El bloque verde #2e9689 (fijado por el brief) lleva solo texto corto/grande:
+			// El bloque verde de marca (fijado por el brief) lleva solo texto corto/grande:
 			// se valida contra 3:1 (texto grande / UI), el texto largo vive en bloques claros.
-			const threshold = rgbKey(bg) === 'rgb(46,150,137)' ? 3 : 4.5;
+			const threshold = rgbKey(bg) === 'rgb(94,130,50)' ? 3 : 4.5;
 			if (ratio < threshold) {
 				contrastOk = false;
 				contrastDetail.push(`${sec.label}:p=${ratio.toFixed(2)}`);
@@ -280,12 +289,12 @@ for (const route of ROUTES) {
 			return {
 				title: h2 ? h2.innerText : null,
 				back: !!document.querySelector('button[aria-label="Volver a la lista de servicios"]'),
-				img: !!document.querySelector('img[alt="Atención Clínica en Terranova Servicios Veterinarios"]'),
+				img: !!document.querySelector('img[alt="Veterinaria en SERVICAN"]'),
 			};
 		});
 		check(
 			'Carousel: Ver más opens detail',
-			detail.title === 'Atención Clínica' && detail.back && detail.img,
+			detail.title === 'Veterinaria' && detail.back && detail.img,
 			JSON.stringify(detail)
 		);
 
@@ -314,9 +323,9 @@ for (const route of ROUTES) {
 	await page.screenshot({ path: `${OUT}/full-desktop-${route.name}.png`, fullPage: true });
 }
 
-// --- Mobile spot checks (index + one interior page) ---
-for (const path of ['/', '/servicios']) {
-	const name = path === '/' ? 'index' : 'servicios';
+// --- Mobile full-page captures (Inicio, Servicios, Contacto) ---
+for (const path of ['/', '/servicios', '/contacto']) {
+	const name = path === '/' ? 'index' : path.slice(1);
 	console.log(`\n=== mobile ${name} ===`);
 	await load(path, 390);
 	const mob = await page.evaluate(() => ({
@@ -332,8 +341,8 @@ for (const path of ['/', '/servicios']) {
 	const menuLinks = await page.evaluate(
 		() => [...document.querySelectorAll('nav[aria-label="Menú móvil"] a')].length
 	);
-	check('Mobile menu opens with 5 links', menuLinks === 5, `links=${menuLinks}`);
-	await page.screenshot({ path: `${OUT}/mobile-top-${name}.png` });
+	check('Mobile menu opens with 4 links', menuLinks === 4, `links=${menuLinks}`);
+	await page.screenshot({ path: `${OUT}/full-mobile-${name}.png`, fullPage: true });
 }
 
 // --- Tablet + mobile carousel breakpoints (servicios) ---
@@ -352,6 +361,15 @@ for (const [width, label, expected] of [
 	check(`Carousel: ${label} shows ${expected} card(s)`, vis === expected, `visible=${vis}`);
 	await page.screenshot({ path: `${OUT}/servicios-${label}.png` });
 }
+
+// --- Casos Clínicos disabled: page must redirect to home ---
+console.log('\n=== casos-clinicos (disabled) ===');
+await page.goto(BASE + '/casos-clinicos', { waitUntil: 'networkidle2', timeout: 60000 });
+check(
+	'Casos Clínicos disabled redirects to /',
+	page.url().replace(/\/$/, '') === BASE,
+	page.url()
+);
 
 await browser.close();
 
