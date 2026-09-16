@@ -265,8 +265,8 @@ export const site: SiteConfig = {
 		mapsTitle: 'Mapa de SERVICAN en Quito',
 		phoneDisplay: '(02) 247-7152',
 		phoneHref: 'tel:+59322477152',
-		whatsappDisplay: '+593 99 105 7501',
-		whatsapp: 'https://wa.me/593991057501',
+		whatsappDisplay: '+593 98 765 4181',
+		whatsapp: 'https://wa.me/593987654181',
 		email: 'gruposervican@gmail.com',
 		schedule: [
 			{ days: 'Lun - Sáb', hours: '8:00 - 20:00' },
