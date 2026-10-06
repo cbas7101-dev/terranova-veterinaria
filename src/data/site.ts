@@ -161,118 +161,169 @@ export type SiteConfig = {
 };
 
 export const site: SiteConfig = {
-	name: 'SERVICAN',
-	subtitle: 'Clínica Veterinaria y Peluquería Canina',
-	legalName: 'SERVICAN',
-	logo: '/logo.png',
-	logoAlt: 'Logo de SERVICAN, clínica veterinaria y peluquería canina',
+	name: "BASSET'S",
+	subtitle: 'Clínica Veterinaria',
+	legalName: 'Clínica Veterinaria Basset’s',
+	logo: '/basset_logo.jpg',
+	logoAlt: 'Logo de Clínica Veterinaria Basset’s',
 	meta: {
-		title: 'SERVICAN | Clínica Veterinaria y Peluquería Canina en Quito',
+		title: 'Basset’s | Clínica Veterinaria en La Floresta, Quito',
 		description:
-			'SERVICAN: clínica veterinaria, peluquería canina, hospedaje y farmacia en Quito. Desde 1999 cuidando a tu mascota con amor, fe y experiencia.',
+			'Clínica Veterinaria Basset’s: atención, consulta y servicios profesionales veterinarios para perros y gatos en La Floresta, Quito. Pontevedra N24-368 y Vizcaya.',
 	},
 	theme: {
-		brand: '#5e8232',
-		brandDeep: '#4f413b',
-		mint: '#d9e8c4',
-		cream: '#f6f4ea',
-		ink: '#3a322d',
+		brand: '#3e6632',
+		brandDeep: '#23391f',
+		mint: '#f2b705',
+		cream: '#f5f1e3',
+		ink: '#232b20',
 	},
 	hero: {
-		badge: 'Desde 1999 cuidando a tu mascota',
-		title: 'Amor, fe y',
-		titleHighlight: 'experiencia',
+		badge: 'En La Floresta, Quito — perros y gatos',
+		title: 'Cuidar su salud también es',
+		titleHighlight: 'amor',
 		subtitle:
-			'Clínica veterinaria, peluquería canina, hospedaje y farmacia en Quito. Amor, fe y experiencia al servicio de tu mascota.',
-		image: 'https://placehold.co/1920x1080/d9e8c4/5e8232/png?text=SERVICAN',
+			'Atención, consulta y servicios profesionales veterinarios para perros y gatos. Anticiparte y mantener sus controles al día puede marcar la diferencia.',
+		image: '/imagen_basset.png',
 	},
 	services: {
 		subtitle:
-			'Veterinaria, peluquería, hospedaje y farmacia: todo lo que tu mascota necesita en un mismo lugar.',
+			'Prevención, diagnóstico y tratamiento para perros y gatos: vacunas, desparasitación, otitis, salud felina y más.',
 		categories: [
 			{
-				id: 'veterinaria',
-				title: 'Veterinaria',
+				id: 'consulta-veterinaria',
+				title: 'Consulta Veterinaria',
 				icon: 'stethoscope',
-				description: 'Consultas médicas, vacunas y desparasitación para la salud de tu mascota.',
-				image:
-					'https://placehold.co/900x1100/f6f4ea/4f413b/png?text=Veterinaria',
-				services: [],
+				description: 'Atención y consulta profesional para perros y gatos. Controles al día para anticiparte a cualquier problema.',
+				image: '/imagen_basset.png',
+				services: [
+					{
+						title: 'Consulta general',
+						description: 'Revisión completa para perros y gatos, con plan de cuidado a su medida.',
+						icon: 'stethoscope',
+					},
+					{
+						title: 'Controles preventivos',
+						description: 'Chequeos periódicos para detectar a tiempo cambios de comportamiento, apetito o ánimo.',
+						icon: 'calendar-check',
+					},
+					{
+						title: 'Alimentación y bienestar',
+						description: 'Orientación frente a riesgos como alimentos grasosos y prevención de pancreatitis.',
+						icon: 'heart-pulse',
+					},
+				],
 			},
 			{
-				id: 'peluqueria-canina',
-				title: 'Peluquería Canina',
-				icon: 'scissors',
-				description: 'Estética y bienestar para tu mascota.',
-				image:
-					'https://placehold.co/900x1100/f6f4ea/4f413b/png?text=Peluqueria+Canina',
-				services: [],
+				id: 'vacunas-desparasitacion',
+				title: 'Vacunas y Desparasitación',
+				icon: 'syringe',
+				description: 'Mantén sus vacunas al día y protégelo de pulgas y parásitos con el cuidado adecuado.',
+				image: '/imagen_basset.png',
+				services: [
+					{
+						title: 'Vacuna antirrábica y plan de vacunas',
+						description: 'No esperes a que te lo recuerde: mantén sus vacunas al día.',
+						icon: 'syringe',
+					},
+					{
+						title: 'Control de pulgas y parásitos',
+						description: 'Tu mascota no necesita ese tipo de huésped. Te ayudamos a elegir la mejor protección.',
+						icon: 'shield-check',
+					},
+				],
 			},
 			{
-				id: 'hospedaje',
-				title: 'Hospedaje',
-				icon: 'house',
-				description: 'Cuidado y alojamiento mientras viajas.',
-				image:
-					'https://placehold.co/900x1100/f6f4ea/4f413b/png?text=Hospedaje',
-				services: [],
+				id: 'diagnostico-tratamiento',
+				title: 'Diagnóstico y Tratamiento',
+				icon: 'microscope',
+				description: 'Diagnóstico preciso para saber si es bacterias, hongos o alergias, y tratamiento adecuado.',
+				image: '/imagen_basset.png',
+				services: [
+					{
+						title: 'Otitis y rascado excesivo',
+						description: 'El rascado no es “normal”. Revisión otoscópica completa y tratamiento adecuado.',
+						icon: 'ear',
+					},
+					{
+						title: 'Detección oportuna',
+						description: 'Si comió algo indebido o cambia su ánimo, detectar a tiempo importa.',
+						icon: 'search',
+					},
+				],
 			},
 			{
-				id: 'farmacia-pet-shop',
-				title: 'Farmacia y Pet Shop',
-				icon: 'pill',
-				description: 'Productos y medicamentos a un clic.',
-				image:
-					'https://placehold.co/900x1100/f6f4ea/4f413b/png?text=Farmacia+y+Pet+Shop',
-				services: [],
+				id: 'salud-felina',
+				title: 'Salud Felina y Bienestar',
+				icon: 'cat',
+				description: 'Si tu gato deja de comer o busca esconderse, visítanos para una revisión preventiva.',
+				image: '/imagen_basset.png',
+				services: [
+					{
+						title: 'Revisión preventiva felina',
+						description: 'Cambios drásticos de comportamiento son una señal. Te ayudamos a interpretarla.',
+						icon: 'cat',
+					},
+					{
+						title: 'Tenencia responsable',
+						description: 'Cuidado diario, vacunación y controles para una compañía sana por muchos años.',
+						icon: 'heart-handshake',
+					},
+				],
 			},
 		],
 	},
 	about: {
-		title: 'Por qué SERVICAN',
-		subtitle: 'Una clínica con historia, dedicada a cuidar a tu mascota como se merece.',
-		lead: 'Amor, fe y experiencia: desde 1999 cuidando a tu mascota.',
+		title: 'Por qué Basset’s',
+		subtitle: 'Atención, consulta y servicios profesionales veterinarios para perros y gatos.',
+		lead: 'Cuidar su salud también es una forma de demostrarle cuánto lo quieres.',
 		features: [
 			{
-				icon: 'calendar-check',
-				title: 'Desde 1999',
-				description: 'Más de 25 años de experiencia cuidando mascotas en Quito.',
+				icon: 'stethoscope',
+				title: 'Perros y gatos',
+				description: 'Atención profesional para tus compañeros de cuatro patas.',
 			},
 			{
-				icon: 'stethoscope',
-				title: 'Atención integral',
-				description: 'Veterinaria, peluquería, hospedaje y farmacia en un mismo lugar.',
+				icon: 'shield-check',
+				title: 'Prevención al día',
+				description: 'Vacunas, desparasitación y controles que marcan la diferencia.',
 			},
 			{
 				icon: 'heart-pulse',
-				title: 'Amor y dedicación',
-				description: 'Cada mascota recibe un cuidado cercano y personalizado.',
+				title: '100% recomendado',
+				description: '5 de 5 en reseñas: cuidado cercano que las familias recomiendan.',
 			},
 			{
 				icon: 'map-pin',
-				title: 'Ubicación de fácil acceso',
-				description: 'Av. Diego de Vásquez N77-424, en el norte de Quito.',
+				title: 'En La Floresta',
+				description: 'Pontevedra N24-368 y Vizcaya, Quito, Ecuador.',
 			},
 		],
-		image: 'https://placehold.co/900x1100/d9e8c4/4f413b/png?text=SERVICAN',
-		imageAlt: 'Equipo de SERVICAN atendiendo a una mascota',
+		image: '/imagen_basset.png',
+		imageAlt: 'Veterinaria de Basset’s atendiendo a un perro y un gato',
 	},
 	contact: {
-		intro: 'Visítanos en el norte de Quito o escríbenos por cualquiera de nuestros canales.',
-		address: 'Av. Diego de Vásquez N77-424, Quito 170303, Ecuador',
+		intro: 'Estamos en La Floresta. Para consultas y citas, contáctanos al 098 376 3535.',
+		address: 'Pontevedra N24-368 y Vizcaya, La Floresta, Quito, Ecuador',
 		mapsEmbed:
-			'https://www.google.com/maps?q=Av.%20Diego%20de%20V%C3%A1squez%20N77-424%2C%20Quito%2C%20Ecuador&z=16&output=embed',
-		mapsTitle: 'Mapa de SERVICAN en Quito',
-		phoneDisplay: '(02) 247-7152',
-		phoneHref: 'tel:+59322477152',
-		whatsappDisplay: '+593 98 765 4181',
-		whatsapp: 'https://wa.me/593987654181',
-		email: 'gruposervican@gmail.com',
+			'https://www.google.com/maps?q=Pontevedra%20N24-368%20y%20Vizcaya%2C%20La%20Floresta%2C%20Quito%2C%20Ecuador&z=16&output=embed',
+		mapsTitle: 'Mapa de Clínica Veterinaria Basset’s en La Floresta, Quito',
+		phoneDisplay: '(02) 222-5230',
+		phoneHref: 'tel:+59322225230',
+		whatsappDisplay: '098 376 3535',
+		whatsapp: 'https://wa.me/593983763535',
+		email: 'clinicaveterinariabassets@hotmail.com',
 		schedule: [
-			{ days: 'Lun - Sáb', hours: '8:00 - 20:00' },
-			{ days: 'Dom y feriados', hours: '9:00 - 19:00' },
+			{ days: 'Lun - Vie', hours: '9:00 - 18:00' },
+			{ days: 'Sáb', hours: '9:00 - 14:00' },
 		],
-		socials: [],
+		socials: [
+			{
+				id: 'facebook',
+				href: 'https://www.facebook.com/clinicaveterinariabassets',
+				handle: 'clinicaveterinariabassets',
+			},
+		],
 	},
 	cases: {
 		enabled: false,
@@ -282,7 +333,7 @@ export const site: SiteConfig = {
 	},
 	footer: {
 		description:
-			'Clínica veterinaria y peluquería canina en Quito. Desde 1999 cuidando a tu mascota con amor, fe y experiencia.',
+			'Clínica Veterinaria Basset’s en La Floresta, Quito. Atención, consulta y servicios profesionales para perros y gatos.',
 	},
 };
 
